@@ -60,7 +60,7 @@ spec:
     - name: dist-folder
       type: string
       description: directory where the app.info.json will be written
-      default: ""
+      default: "dist"
   workspaces:
     - name: source
       description: workspace where the code is stored
@@ -84,7 +84,7 @@ spec:
 
         cp Dockerfile $source_path
         cp Caddyfile $source_path
-        cp -r dist/ $source_path
+        cp -r $(params.dist-folder)/ $source_path
       env:
         - name: COMPONENT
           value: $(params.component)
