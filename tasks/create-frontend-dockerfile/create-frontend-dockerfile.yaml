@@ -76,6 +76,10 @@ spec:
         #!/usr/bin/env sh
         set -xe
 
+        # handle empty string as dist-folder parameter
+        # which breaks the frontend-build-container scripts
+        if [ -z "$(params.dist-folder)" ]; then DIST_FOLDER="dist"; fi
+
         source_path=$(workspaces.source.path)/$(params.subdirectory)/$(params.path-context)
 
         cp -r  $source_path/. /workspace
@@ -84,7 +88,7 @@ spec:
 
         cp Dockerfile $source_path
         cp Caddyfile $source_path
-        cp -r $(params.dist-folder)/ $source_path
+        cp -r ${DIST_FOLDER}/ $source_path
       env:
         - name: COMPONENT
           value: $(params.component)
