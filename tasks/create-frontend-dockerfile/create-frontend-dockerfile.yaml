@@ -71,7 +71,7 @@ spec:
           memory: 2Gi
         limits:
           memory: 5Gi
-      image: quay.io/cloudservices/frontend-build-container:latest
+      image: quay.io/cloudservices/frontend-build-container:3bacc0b
       script: |
         #!/usr/bin/env sh
         set -xe
