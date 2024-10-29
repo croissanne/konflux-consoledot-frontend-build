@@ -83,6 +83,8 @@ spec:
         source_path=$(workspaces.source.path)/$(params.subdirectory)/$(params.path-context)
 
         cp -r  $source_path/. /workspace
+        # HACK
+        rm -rf /workspace/source/source
         cd /container_workspace
         bash universal_build.sh
 
