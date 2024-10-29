@@ -82,10 +82,15 @@ spec:
 
         source_path=$(workspaces.source.path)/$(params.subdirectory)/$(params.path-context)
 
-        cp -r  $source_path/. /workspace
+        cp -r $source_path/. /container_workspace/
         cd /container_workspace
+        ls .
+
+        # hack: stop the universal build script from copying into the container_workspace
+        sed -i 's|cp -r /workspace/. /container_workspace/||g' universal_build.sh
         bash universal_build.sh
 
+        cp -r  $source_path/. /container_workspace
         cp Dockerfile $source_path
         cp Caddyfile $source_path
         cp -r ${DIST_FOLDER}/ $source_path
